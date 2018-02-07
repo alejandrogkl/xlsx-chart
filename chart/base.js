@@ -291,7 +291,7 @@ var Chart = Backbone.Model.extend({
                         };
                     }
 
-                    CircleMarker(r);
+                    CircleMarker(r, series.color);
                     SmoothLine(r);
                 }
 
@@ -508,8 +508,9 @@ function SmoothLine(r) {
     };
 }
 
-function CircleMarker(r) {
+function CircleMarker(r, defaultColor) {
     r['c:marker'] = {
+        'c:spPr': _.extend(ColorTag(defaultColor), { 'a:ln': ColorTag(defaultColor) }),
         'c:symbol': {
             $: {
                 val: 'circle'
