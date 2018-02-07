@@ -290,6 +290,9 @@ var Chart = Backbone.Model.extend({
                             'a:ln': ColorTag(series.color)
                         };
                     }
+
+                    CircleMarker(r);
+                    SmoothLine(r);
                 }
 
                 if (chart === 'column') {
@@ -496,6 +499,29 @@ var Chart = Backbone.Model.extend({
     }
 });
 module.exports = Chart;
+
+function SmoothLine(r) {
+    r['c:smooth'] = {
+        $: {
+            val: 1
+        }
+    };
+}
+
+function CircleMarker(r) {
+    r['c:marker'] = {
+        'c:symbol': {
+            $: {
+                val: 'circle'
+            }
+        },
+        'c:size': {
+            $: {
+                val: 7
+            }
+        }
+    };
+}
 
 function LineDataPointTag(id, color, series, f) {
     return {
