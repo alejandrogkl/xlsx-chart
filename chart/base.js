@@ -320,6 +320,8 @@ var Chart = Backbone.Model.extend({
                     r['c:dPt'] = dataPoints;
                 }
 
+                DataLabels(r);
+
                 if (chart === 'scatter') {
                     r['c:xVal'] = r['c:cat'];
                     delete r['c:cat'];
@@ -334,6 +336,7 @@ var Chart = Backbone.Model.extend({
                         }
                     };
                 }
+
                 ser[chart] = ser[chart] || [];
                 ser[chart].push(r);
             });
@@ -505,6 +508,14 @@ var Chart = Backbone.Model.extend({
     }
 });
 module.exports = Chart;
+
+function DataLabels(r) {
+    r['c:dLbls']['c:showVal'] = {
+        $: {
+            val: 1
+        }
+    };
+}
 
 function Legend(o) {
     o['c:chartSpace']['c:chart']['c:legend'] = {
