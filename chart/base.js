@@ -336,7 +336,6 @@ var Chart = Backbone.Model.extend({
                         }
                     };
                 }
-
                 ser[chart] = ser[chart] || [];
                 ser[chart].push(r);
             });
@@ -510,9 +509,38 @@ var Chart = Backbone.Model.extend({
 module.exports = Chart;
 
 function DataLabels(r) {
-    r['c:dLbls']['c:showVal'] = {
+    /**
+     * <c:showLegendKey val="0"/>
+        <c:showVal val="1"/>
+        <c:showCatName val="0"/>
+        <c:showSerName val="0"/>
+        <c:showPercent val="0"/>
+        <c:showBubbleSize val="0"/>
+        <c:showLeaderLines val="0"/>
+    */
+    r['c:dLbls'] = {
+        'c:showLegendKey': False(),
+        'c:showVal': True(),
+        'c:showCatName': False(),
+        'c:showSerName': False(),
+        'c:showPercent': False(),
+        'c:showBubbleSize': False(),
+        'c:showLeaderLines': False()
+    };
+}
+
+function True() {
+    return {
         $: {
             val: 1
+        }
+    };
+}
+
+function False() {
+    return {
+        $: {
+            val: 0
         }
     };
 }
