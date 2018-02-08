@@ -341,7 +341,7 @@ var Chart = Backbone.Model.extend({
             if (me.titles.length === 1) {
                 delete o['c:chartSpace']['c:chart']['c:legend'];
             } else if (me.titles.length > 1) {
-                RemoveMainSeriesLegendEntry(o);
+                Legend(o);
             }
             /*
 			    var tag = chart == "column" ? "bar" : chart;
@@ -506,8 +506,13 @@ var Chart = Backbone.Model.extend({
 });
 module.exports = Chart;
 
-function RemoveMainSeriesLegendEntry(o) {
+function Legend(o) {
     o['c:chartSpace']['c:chart']['c:legend'] = {
+        'c:legendPos': {
+            $: {
+                val: 'b'
+            }
+        },
         'c:legendEntry': {
             'c:idx': {
                 $: {
