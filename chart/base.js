@@ -291,7 +291,7 @@ var Chart = Backbone.Model.extend({
                         };
                     }
 
-                    CircleMarker(r, series.color);
+                    CircleMarkers(r, series.color);
                     SmoothLine(r);
                 }
 
@@ -337,6 +337,12 @@ var Chart = Backbone.Model.extend({
                 ser[chart] = ser[chart] || [];
                 ser[chart].push(r);
             });
+
+            if (me.titles.length === 1) {
+                delete o['c:chartSpace']['c:chart']['c:legend'];
+            } else if (me.titles.length > 1) {
+                RemoveMainSeriesLegendEntry(o);
+            }
             /*
 			    var tag = chart == "column" ? "bar" : chart;
 			    o ["c:chartSpace"]["c:chart"]["c:plotArea"]["c:barChart"][0]["c:ser"] = ser;
@@ -500,6 +506,23 @@ var Chart = Backbone.Model.extend({
 });
 module.exports = Chart;
 
+function RemoveMainSeriesLegendEntry(o) {
+    o['c:chartSpace']['c:chart']['c:legend'] = {
+        'c:legendEntry': {
+            'c:idx': {
+                $: {
+                    val: 0
+                }
+            },
+            'c:delete': {
+                $: {
+                    val: 1
+                }
+            }
+        }
+    };
+}
+
 function SmoothLine(r) {
     r['c:smooth'] = {
         $: {
@@ -508,7 +531,7 @@ function SmoothLine(r) {
     };
 }
 
-function CircleMarker(r, defaultColor) {
+function CircleMarkers(r, defaultColor) {
     r['c:marker'] = {
         'c:spPr': _.extend(ColorTag(defaultColor), { 'a:ln': ColorTag(defaultColor) }),
         'c:symbol': {
