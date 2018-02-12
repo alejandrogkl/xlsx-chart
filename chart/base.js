@@ -292,7 +292,7 @@ var Chart = Backbone.Model.extend({
                     }
 
                     CircleMarkers(r, series.color);
-                    // SmoothLine(r);
+                    SmoothLine(r);
                 }
 
                 if (chart === 'column') {
