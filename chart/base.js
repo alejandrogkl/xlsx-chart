@@ -291,8 +291,8 @@ var Chart = Backbone.Model.extend({
                         };
                     }
 
-                    CircleMarkers(r, series.color);
-                    SmoothLine(r);
+                    // CircleMarkers(r, series.color);
+                    // SmoothLine(r);
                 }
 
                 if (chart === 'column') {
@@ -301,26 +301,26 @@ var Chart = Backbone.Model.extend({
                     }
                 }
 
-                var dataPoints = _.map(
-                    _.filter(me.fields, function(f) {
-                        return series[f] && series[f].color;
-                    }),
-                    function(f, j) {
-                        if (chart === 'line') {
-                            return LineDataPointTag(j, series[f].color);
-                        }
+                // var dataPoints = _.map(
+                //     _.filter(me.fields, function(f) {
+                //         return series[f] && series[f].color;
+                //     }),
+                //     function(f, j) {
+                //         if (chart === 'line') {
+                //             return LineDataPointTag(j, series[f].color);
+                //         }
 
-                        if (chart === 'column') {
-                            return ColumnDataPointTag(j, series[f].color);
-                        }
-                    }
-                );
+                //         if (chart === 'column') {
+                //             return ColumnDataPointTag(j, series[f].color);
+                //         }
+                //     }
+                // );
 
-                if (dataPoints.length) {
-                    r['c:dPt'] = dataPoints;
-                }
+                // if (dataPoints.length) {
+                //     r['c:dPt'] = dataPoints;
+                // }
 
-                DataLabels(r);
+                // DataLabels(r);
 
                 if (chart === 'scatter') {
                     r['c:xVal'] = r['c:cat'];
@@ -340,11 +340,11 @@ var Chart = Backbone.Model.extend({
                 ser[chart].push(r);
             });
 
-            if (me.titles.length === 1) {
-                delete o['c:chartSpace']['c:chart']['c:legend'];
-            } else if (me.titles.length > 1) {
-                Legend(o);
-            }
+            // if (me.titles.length === 1) {
+            //     delete o['c:chartSpace']['c:chart']['c:legend'];
+            // } else if (me.titles.length > 1) {
+            //     Legend(o);
+            // }
             /*
 			    var tag = chart == "column" ? "bar" : chart;
 			    o ["c:chartSpace"]["c:chart"]["c:plotArea"]["c:barChart"][0]["c:ser"] = ser;
