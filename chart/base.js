@@ -557,7 +557,9 @@ function Excel13Compat(o) {
     };
 
     // lineChart
-    o['c:chartSpace']['c:chart']['c:plotArea']['c:lineChart']['c:varyColors'] = { $: { val: 0 } };
+    if (o['c:chartSpace']['c:chart']['c:plotArea']['c:lineChart']) {
+        o['c:chartSpace']['c:chart']['c:plotArea']['c:lineChart']['c:varyColors'] = { $: { val: 0 } };
+    }
 }
 
 function DataLabels(r) {
