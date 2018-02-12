@@ -301,24 +301,24 @@ var Chart = Backbone.Model.extend({
                     }
                 }
 
-                // var dataPoints = _.map(
-                //     _.filter(me.fields, function(f) {
-                //         return series[f] && series[f].color;
-                //     }),
-                //     function(f, j) {
-                //         if (chart === 'line') {
-                //             return LineDataPointTag(j, series[f].color);
-                //         }
+                var dataPoints = _.map(
+                    _.filter(me.fields, function(f) {
+                        return series[f] && series[f].color;
+                    }),
+                    function(f, j) {
+                        if (chart === 'line') {
+                            return LineDataPointTag(j, series[f].color);
+                        }
 
-                //         if (chart === 'column') {
-                //             return ColumnDataPointTag(j, series[f].color);
-                //         }
-                //     }
-                // );
+                        if (chart === 'column') {
+                            return ColumnDataPointTag(j, series[f].color);
+                        }
+                    }
+                );
 
-                // if (dataPoints.length) {
-                //     r['c:dPt'] = dataPoints;
-                // }
+                if (dataPoints.length) {
+                    r['c:dPt'] = dataPoints;
+                }
 
                 // DataLabels(r);
 
