@@ -320,7 +320,7 @@ var Chart = Backbone.Model.extend({
                     r['c:dPt'] = dataPoints;
                 }
 
-                // DataLabels(r);
+                DataLabels(r);
 
                 if (chart === 'scatter') {
                     r['c:xVal'] = r['c:cat'];
