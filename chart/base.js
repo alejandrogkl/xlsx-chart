@@ -274,7 +274,7 @@ var Chart = Backbone.Model.extend({
                                         $: {
                                             idx: j
                                         },
-                                        'c:v': me.data[t][f]
+                                        'c:v': me.data[t][f].value
                                     };
                                 })
                             }
@@ -513,8 +513,11 @@ module.exports = Chart;
 
 function Excel13Compat(o) {
     o['c:chartSpace']['c:date1904'] = { $: { val: 0 } };
+
     o['c:chartSpace']['c:lang'] = { $: { val: 'en-US' } };
+
     o['c:chartSpace']['c:roundedCorners'] = { $: { val: 0 } };
+
     o['c:chartSpace']['mc:AlternateContent'] = {
         $: {
             'xmlns:mc': 'http://schemas.openxmlformats.org/markup-compatibility/2006'
@@ -538,6 +541,23 @@ function Excel13Compat(o) {
             }
         }
     };
+
+    // valAx
+    o['c:chartSpace']['c:chart']['c:plotArea']['c:valAx']['c:delete'] = { $: { val: 0 } };
+    o['c:chartSpace']['c:chart']['c:plotArea']['c:valAx']['c:majorTickMark'] = { $: { val: 'out' } };
+    o['c:chartSpace']['c:chart']['c:plotArea']['c:valAx']['c:minorTickMark'] = { $: { val: 'none' } };
+
+    // catAx
+    o['c:chartSpace']['c:chart']['c:plotArea']['c:catAx']['c:delete'] = { $: { val: 0 } };
+    o['c:chartSpace']['c:chart']['c:plotArea']['c:catAx']['c:majorTickMark'] = { $: { val: 'out' } };
+    o['c:chartSpace']['c:chart']['c:plotArea']['c:catAx']['c:minorTickMark'] = { $: { val: 'none' } };
+    o['c:chartSpace']['c:chart']['c:plotArea']['c:catAx']['c:noMultiLvlLbl'] = { $: { val: 0 } };
+    o['c:chartSpace']['c:chart']['c:plotArea']['c:catAx']['c:delete'] = {
+        $: { sourceLinked: 0, formatCode: 'General' }
+    };
+
+    // lineChart
+    o['c:chartSpace']['c:chart']['c:plotArea']['c:lineChart']['c:varyColors'] = { $: { val: 0 } };
 }
 
 function DataLabels(r) {
