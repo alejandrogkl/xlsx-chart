@@ -340,11 +340,11 @@ var Chart = Backbone.Model.extend({
                 ser[chart].push(r);
             });
 
-            // if (me.titles.length === 1) {
-            //     delete o['c:chartSpace']['c:chart']['c:legend'];
-            // } else if (me.titles.length > 1) {
-            //     Legend(o);
-            // }
+            if (me.titles.length === 1) {
+                delete o['c:chartSpace']['c:chart']['c:legend'];
+            } else if (me.titles.length > 1) {
+                Legend(o);
+            }
             /*
 			    var tag = chart == "column" ? "bar" : chart;
 			    o ["c:chartSpace"]["c:chart"]["c:plotArea"]["c:barChart"][0]["c:ser"] = ser;
