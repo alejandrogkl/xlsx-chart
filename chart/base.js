@@ -386,6 +386,9 @@ var Chart = Backbone.Model.extend({
 			delete o ["c:chartSpace"]["c:chart"]["c:plotArea"]["c:lineChart"];
 			delete o ["c:chartSpace"]["c:chart"]["c:plotArea"]["c:areaChart"];
             */
+
+            Excel13Compat(o);
+
             me.write({ file: 'xl/charts/chart1.xml', object: o });
             cb();
         });
@@ -507,6 +510,35 @@ var Chart = Backbone.Model.extend({
     }
 });
 module.exports = Chart;
+
+function Excel13Compat(o) {
+    o['c:chartSpace']['c:date1904'] = { $: { val: 0 } };
+    o['c:chartSpace']['c:lang'] = { $: { val: 'en-US' } };
+    o['c:chartSpace']['c:roundedCorners'] = { $: { val: 0 } };
+    o['c:chartSpace']['mc:AlternateContent'] = {
+        $: {
+            'xmlns:mc': 'http://schemas.openxmlformats.org/markup-compatibility/2006'
+        },
+        'mc:Choice': {
+            $: {
+                Requires: 'c14',
+                'xmlns:c14': 'http://schemas.microsoft.com/office/drawing/2007/8/2/chart'
+            },
+            'c14:style': {
+                $: {
+                    val: '102'
+                }
+            }
+        },
+        'mc:Fallback': {
+            'c:style': {
+                $: {
+                    val: 2
+                }
+            }
+        }
+    };
+}
 
 function DataLabels(r) {
     /**
